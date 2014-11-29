@@ -3,6 +3,7 @@
 'use strict';
 
 var _ = require('underscore');
+var Nil = [];
 
 
 /**
@@ -46,7 +47,6 @@ var Eval = function(exp, env) {
   }
 };
 
-
 /**
  * Apply
  * @param {Array} procedure
@@ -67,3 +67,70 @@ var Apply = function(procedure, args) {
   }
 };
 
+/**
+ * listOfValues
+ * @param {Any} exps
+ * @param {Object} env
+ */
+var listOfValues = function(exps, env) {
+  if (isNoOperands exp) {
+    return Nil;
+  }
+  else {
+    return Cons(Eval(firstOperand(exps), env),
+                listOfValues(restOperands(exps), env));
+  }
+};
+
+/**
+ * evalIf
+ * @param {Any} exp
+ * @param {Object} env
+ */
+var evalIf = function(exp, env) {
+  if (isTrue(Eval(ifPredicate(env), env))) {
+    return Eval(ifConsequent(exp), env);
+  }
+  else {
+    return Eval(ifAlternative(exp), env);
+  }
+};
+
+/**
+ * evalSequence
+ * @param {Any} exps
+ * @param {Object} env
+ */
+var evalSequence = function(exps, env) {
+  if (isLastExp(exps)) {
+    return Eval(firstExp(exps), env);
+  }
+  else {
+    Eval(firstExp(exps), env);
+    return evalSequence(restExps(exps), env);
+  }
+};
+
+/**
+ * evalAssignment
+ * @param {Any} exp
+ * @param {Object} env
+ */
+var evalAssignment = function(exp, env) {
+  setValiableValue(assignmentValiable(exp),
+                   eval(assignmentValue(exp), env),
+                   env);
+  return 'ok';
+};
+
+/**
+ * evalDefinition
+ * @param {Any} exp
+ * @param {Object} env
+ */
+var evalDefinition = function(exp, env) {
+  setValiableValue(definitionValiable(exp),
+                   eval(definitionValue(exp), env),
+                   env);
+  return 'ok';
+};
