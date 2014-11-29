@@ -1,0 +1,30 @@
+{
+  "boss"        : true,
+  "forin"       : true,
+  "noarg"       : true,
+  "newcap"      : false,
+  "noempty"     : true,
+  "eqeqeq"      : true,
+  "loopfunc"    : true,
+  "bitwise"     : true,
+  "strict"      : true,
+  "undef"       : true,
+  "unused"      : true,
+  "curly"       : true,
+  "browser"     : true,
+  "indent"      : 2,
+  "maxlen"      : 80,
+  "maxerr"      : 50,
+  "globalstrict": true,
+  "globals": {
+    "alert"       : false,
+    "confirm"     : false,
+    "prompt"      : false,
+    "module"      : false,
+    "exports"     : false,
+    "require"     : false,
+    "console"     : false,
+    "setTimeout"  : false,
+    "setInterval" : false
+  }
+}
