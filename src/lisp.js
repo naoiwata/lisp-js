@@ -122,10 +122,8 @@ var listOfValues = function(exps, env) {
   if (isNoOperands(exp)) {
     return Nil;
   }
-  else {
-    return Cons(Eval(firstOperand(exps), env),
-                listOfValues(restOperands(exps), env));
-  }
+  return Cons(Eval(firstOperand(exps), env),
+              listOfValues(restOperands(exps), env));
 };
 
 /**
@@ -137,9 +135,7 @@ var evalIf = function(exp, env) {
   if (isTrue(Eval(ifPredicate(env), env))) {
     return Eval(ifConsequent(exp), env);
   }
-  else {
-    return Eval(ifAlternative(exp), env);
-  }
+  return Eval(ifAlternative(exp), env);
 };
 
 /**
@@ -209,11 +205,46 @@ var isAssignment = function(exp) {
 
 var assignmentVariable = function(exp) {
   return Cadr(exp);
-}
+};
 
 var assignmentValue = function(exp) {
   return Caddr(exp);
-}
+};
+
+var isDefinition = function(exp) {
+  return isTaggedList(exp, 'define');
+};
+
+var definitionVariable = function(exp) {
+  if (isSymbol(Cadr(exp))) {
+    return Cadr(exp);
+  }
+  return Caadr(exp);
+};
+
+var definitionValue = function(exp) {
+  if (isSymbol(Cadr(exp))) {
+    return Caddr(exp);
+  }
+  return makeLambda(Cdadr(exp),
+                    Cddr(exp));
+};
+
+var isLamnda = function(exp) {
+  return isTaggedList(exp, 'lambda');
+};
+
+var lambdaParameters = function(exp) {
+  return Cadr(exp);
+};
+
+var lambdaBody = function(exp) {
+  return Cddr(exp);
+};
+
+var makeLambda = function(parameters, body) {
+  return Cons('lambda', Cons(parameters, body));
+};
 
 /* --------------------------
  * Utilities
