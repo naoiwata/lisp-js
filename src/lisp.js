@@ -3,8 +3,54 @@
 'use strict';
 
 var _ = require('underscore');
-var Nil = [];
 
+
+/* --------------------------
+ * Lisp built in methods
+ * -------------------------- */
+var Nil = [],
+    True = true,
+    False = false;
+
+var Car = function(list) {
+  return _.first(list);
+};
+
+var Cdr = function(list) {
+  return _.rest(list);
+};
+
+var Cons = function(car, cdr) {
+  return [car, cdr];
+};
+
+var isPair = function(item) {
+  return _.isArray(item) && item.length === 2? true: false;
+};
+
+var isEq = function(x, y) {
+  return x === y? true: false;
+};
+
+var Cadr = function(list) {
+  return list[1][0];
+};
+
+var Caadr = function(list) {
+  return list[1][0][0];
+};
+
+var Cdadr = function(list) {
+  return list[1][0][1];
+};
+
+var Caddr = function(list) {
+  return list[1][1][0];
+};
+
+var Cdddr = function(list) {
+  return list[1][1][1];
+};
 
 /**
  * Eval
@@ -73,7 +119,7 @@ var Apply = function(procedure, args) {
  * @param {Object} env
  */
 var listOfValues = function(exps, env) {
-  if (isNoOperands exp) {
+  if (isNoOperands(exp)) {
     return Nil;
   }
   else {
@@ -118,7 +164,7 @@ var evalSequence = function(exps, env) {
  */
 var evalAssignment = function(exp, env) {
   setValiableValue(assignmentValiable(exp),
-                   eval(assignmentValue(exp), env),
+                   Eval(assignmentValue(exp), env),
                    env);
   return 'ok';
 };
@@ -130,7 +176,53 @@ var evalAssignment = function(exp, env) {
  */
 var evalDefinition = function(exp, env) {
   setValiableValue(definitionValiable(exp),
-                   eval(definitionValue(exp), env),
+                   Eval(definitionValue(exp), env),
                    env);
   return 'ok';
+};
+
+/* --------------------------
+ * Expressions
+ * --------------------------
+ */
+var selfEvaluating = function(exp) {
+  if (_.isString(exp) || _.isNumber(exp)) {
+    return True;
+  }
+  else {
+    return False;
+  }
+};
+
+var isVariable = function(exp) {
+  // TODO
+  return False;
+};
+
+var isQuoted = function(exp) {
+  return isTaggedList(exp, 'quote');
+};
+
+var isAssignment = function(exp) {
+  return isTaggedList(exp, 'set!');
+};
+
+var assignmentVariable = function(exp) {
+  return Cadr(exp);
+}
+
+var assignmentValue = function(exp) {
+  return Caddr(exp);
+}
+
+/* --------------------------
+ * Utilities
+ * -------------------------- */
+var isTaggedList = function(exp, tag) {
+  if (isPair(exp)) {
+    return isEq(Car(exp), tag);
+  }
+  else {
+    return False;
+  }
 };
