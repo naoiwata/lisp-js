@@ -33,23 +33,23 @@ var isEq = function(x, y) {
 };
 
 var Cadr = function(list) {
-  return list[1][0];
+  return Car(Cdr(list));
 };
 
 var Caadr = function(list) {
-  return list[1][0][0];
+  return Car(Car(Cdr(list)));
 };
 
 var Cdadr = function(list) {
-  return list[1][0][1];
+  return Cdr(Car(Cdr(list)));
 };
 
 var Caddr = function(list) {
-  return list[1][1][0];
+  return Car(Cdr(Cdr(list)));
 };
 
 var Cdddr = function(list) {
-  return list[1][1][1];
+  return Cdr(Cdr(Cdr(list)));
 };
 
 /**
