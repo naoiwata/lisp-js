@@ -12,6 +12,23 @@ var Nil = [],
     True = true,
     False = false;
 
+var isEq = function(x, y) {
+  return x === y? true: false;
+};
+
+var Not = function(x) {
+  return isEq(x, False);
+};
+
+var isNull = function(x) {
+  return _.isNull(x);
+};
+
+var isSymbol = function(x) {
+  // FIXME
+  return _.isString(x);
+};
+
 var Car = function(list) {
   return _.first(list);
 };
@@ -24,12 +41,19 @@ var Cons = function(car, cdr) {
   return [car, cdr];
 };
 
-var isPair = function(item) {
-  return _.isArray(item) && item.length === 2? true: false;
+var List = function() {
+  var list = [],
+      arg = arguments,
+      len = arg.length,
+      index = -1;
+  while (++index < len) {
+    list.push(lists[index]);
+  }
+  return list;
 };
 
-var isEq = function(x, y) {
-  return x === y? true: false;
+var isPair = function(item) {
+  return _.isArray(item) && isEq(item.length, 2)? true: false;
 };
 
 var Cadr = function(list) {
@@ -56,9 +80,8 @@ var Cdddr = function(list) {
   return Cdr(Cdr(Cdr(list)));
 };
 
-var isSymbol = function(exp) {
-  // FIXME
-  return _.isString(exp);
+var Cadddr = function(list) {
+  return Car(Cdr(Cdr(Cdr(list))));
 };
 
 /**
@@ -253,6 +276,29 @@ var lambdaBody = function(exp) {
 
 var makeLambda = function(parameters, body) {
   return Cons('lambda', Cons(parameters, body));
+};
+
+var isIf = function(exp) {
+  return isTaggedList(exp, 'if?');
+};
+
+var ifPreficate = function(exp) {
+  return Cadr(exp);
+};
+
+var ifConsequent = function(exp) {
+  return Caddr(exp);
+};
+
+var ifAlternative = function(exp) {
+  if (Not(isNull(Cdddr(exp)))) {
+    return Cadddr(exp);
+  }
+  return 'false';
+};
+
+var makeIf = function(predicate, consequent, alternative) {
+  return List('if', predicate, consequent, alternative);
 };
 
 /* --------------------------
