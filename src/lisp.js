@@ -36,6 +36,10 @@ var Cadr = function(list) {
   return Car(Cdr(list));
 };
 
+var Cddr = function(list) {
+  return Cdr(Cdr(list));
+};
+
 var Caadr = function(list) {
   return Car(Car(Cdr(list)));
 };
@@ -50,6 +54,11 @@ var Caddr = function(list) {
 
 var Cdddr = function(list) {
   return Cdr(Cdr(Cdr(list)));
+};
+
+var isSymbol = function(exp) {
+  // FIXME
+  return _.isString(exp);
 };
 
 /**
@@ -85,7 +94,7 @@ var Eval = function(exp, env) {
     return evalSequence(beginActions(exp), env);
   }
   else if (isApplication(exp)) {
-    return apply(Eval(operator(exp), env),
+    return Apply(Eval(operator(exp), env),
                  listOfValues(operands(exp), env));
   }
   else {
@@ -109,7 +118,7 @@ var Apply = function(procedure, args) {
                                           procedureEnvironment(procedure)));
   }
   else {
-    throw new Error('Unknown procedure type -- APPLY ' + exp);
+    throw new Error('Unknown procedure type -- APPLY ' + procedure);
   }
 };
 
