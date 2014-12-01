@@ -8,7 +8,7 @@ var _ = require('underscore');
 /* --------------------------
  * Lisp built in methods
  * -------------------------- */
-var Nil = [],
+var Nil = null,
     True = true,
     False = false;
 
@@ -17,7 +17,7 @@ var isEq = function(x, y) {
 };
 
 var Not = function(x) {
-  return isEq(x, False);
+  return !x;
 };
 
 var isNull = function(x) {
