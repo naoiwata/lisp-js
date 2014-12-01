@@ -47,7 +47,7 @@ var List = function() {
       len = arg.length,
       index = -1;
   while (++index < len) {
-    list.push(lists[index]);
+    list.push(arg[index]);
   }
   return list;
 };
