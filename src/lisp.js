@@ -351,6 +351,30 @@ var makeBegin = function(seq) {
   return Cons('begin', seq);
 };
 
+var isApplication = function(exp) {
+  return isPair(exp);
+};
+
+var operator = function(exp) {
+  return Car(exp);
+};
+
+var operands = function(exp) {
+  return Cdr(exp);
+};
+
+var isNoOperands = function(ops) {
+  return isNull(ops);
+};
+
+var firstOperand = function(ops) {
+  return Car(ops);
+};
+
+var restOperands = function(ops) {
+  return Cdr(ops);
+};
+
 /* --------------------------
  * Utilities
  * -------------------------- */
