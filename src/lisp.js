@@ -145,6 +145,20 @@ var Apply = function(procedure, args) {
   }
 };
 
+var NumberToString = function(v) {
+  if (!_.isNumber(v)) {
+    throw new TypeError(v);
+  }
+  return String(v);
+};
+
+var StringToNumber = function(v) {
+  if (!_.isString(v) || v === '' || _.isNaN(Number(v))) {
+    throw new TypeError(v);
+  }
+  return Number(v);
+};
+
 /**
  * listOfValues
  * @param {Any} exps
@@ -321,6 +335,22 @@ var restExps = function(seq) {
   return Cdr(seq);
 };
 
+var sequenceToExp = function(seq) {
+  if (isNull(seq)) {
+    return seq;
+  }
+  else if (isLastExp(seq)) {
+    return firstExp(seq);
+  }
+  else {
+    return makeBegin(seq);
+  }
+};
+
+var makeBegin = function(seq) {
+  return Cons('begin', seq);
+};
+
 /* --------------------------
  * Utilities
  * -------------------------- */
@@ -332,3 +362,4 @@ var isTaggedList = function(exp, tag) {
     return False;
   }
 };
+
