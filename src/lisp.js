@@ -301,6 +301,26 @@ var makeIf = function(predicate, consequent, alternative) {
   return List('if', predicate, consequent, alternative);
 };
 
+var isBegin = function(exp) {
+  return isTaggedList(exp, 'begin');
+};
+
+var beginActions = function(exp) {
+  return Cdr(exp);
+};
+
+var isLastExp = function(seq) {
+  return isNull(Cdr(seq));
+};
+
+var firstExp = function(seq) {
+  return Car(seq);
+};
+
+var restExps = function(seq) {
+  return Cdr(seq);
+};
+
 /* --------------------------
  * Utilities
  * -------------------------- */
