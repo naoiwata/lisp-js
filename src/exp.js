@@ -73,7 +73,7 @@ var makeLambda = function(parameters, body) {
 };
 
 var isIf = function(exp) {
-  return isTaggedList(exp, 'if?');
+  return isTaggedList(exp, 'if');
 };
 
 var ifPreficate = function(exp) {
