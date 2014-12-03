@@ -178,3 +178,21 @@ var condActions = function(clause) {
 var CondToIf = function(exp) {
   return expandClauses(condClauses(exp));
 };
+
+var expandClauses = function(clauses) {
+  if (isNull(clauses)) {
+    return False;
+  }
+  var first = Car(clauses),
+      rest = Cdr(clauses);
+  if (isCondElseClause(first)) {
+    if (isNull(rest)) {
+      return sequenceToExp(condActions(first));
+    }
+    throw new Error('ELSE clause isn\'t last -- COND->IF ' + clauses);
+  }
+  return makeIf(condPredicate(first),
+                sequenceToExp(condActions(first)),
+                expandClauses(rest));
+};
+
