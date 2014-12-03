@@ -12,7 +12,7 @@ var Nil = null,
     False = false;
 
 var isEq = function(x, y) {
-  return x === y? true: false;
+  return x === y? True: False;
 };
 
 var Not = function(x) {
@@ -52,7 +52,7 @@ var List = function() {
 };
 
 var isPair = function(item) {
-  return _.isArray(item) && isEq(item.length, 2)? true: false;
+  return _.isArray(item) && isEq(item.length, 2)? True: False;
 };
 
 var Cadr = function(list) {

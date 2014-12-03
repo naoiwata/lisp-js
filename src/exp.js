@@ -17,8 +17,8 @@ var selfEvaluating = function(exp) {
 };
 
 var isVariable = function(exp) {
-  // TODO
-  return False;
+  // FIXME:
+  return !_.isUndefined(exp);
 };
 
 var isQuoted = function(exp) {

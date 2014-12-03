@@ -22,7 +22,5 @@ var isTaggedList = function(exp, tag) {
   if (isPair(exp)) {
     return isEq(Car(exp), tag);
   }
-  else {
-    return False;
-  }
+  return False;
 };
