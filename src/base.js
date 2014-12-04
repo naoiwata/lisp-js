@@ -11,21 +11,8 @@ var Nil = null,
     True = true,
     False = false;
 
-var isEq = function(x, y) {
-  return x === y? True: False;
-};
-
 var Not = function(x) {
   return !x;
-};
-
-var isNull = function(x) {
-  return _.isNull(x);
-};
-
-var isSymbol = function(x) {
-  // FIXME
-  return _.isString(x);
 };
 
 var Car = function(list) {
@@ -49,10 +36,6 @@ var List = function() {
     list.push(arg[index]);
   }
   return list;
-};
-
-var isPair = function(item) {
-  return _.isArray(item) && isEq(item.length, 2)? True: False;
 };
 
 var Cadr = function(list) {
@@ -81,4 +64,29 @@ var Cdddr = function(list) {
 
 var Cadddr = function(list) {
   return Car(Cdr(Cdr(Cdr(list))));
+};
+
+var isEq = function(x, y) {
+  return x === y? True: False;
+};
+
+var isPair = function(item) {
+  return _.isArray(item) && isEq(item.length, 2)? True: False;
+};
+
+var isNull = function(x) {
+  return _.isNull(x);
+};
+
+var isSymbol = function(x) {
+  // FIXME
+  return _.isString(x);
+};
+
+var isTrue = function(x) {
+  return Not(isEq(x, False));
+};
+
+var isFalse = function(x) {
+  return isEq(x, False);
 };
