@@ -67,11 +67,11 @@ var Cadddr = function(list) {
 };
 
 var isEq = function(x, y) {
-  return x === y? True: False;
+  return x === y;
 };
 
 var isPair = function(item) {
-  return _.isArray(item) && isEq(item.length, 2)? True: False;
+  return _.isArray(item) && isEq(item.length, 2);
 };
 
 var isNull = function(x) {
