@@ -15,6 +15,10 @@ var Not = function(x) {
   return !x;
 };
 
+var Length = function(x) {
+  return x.length;
+};
+
 var Car = function(list) {
   return _.first(list);
 };
@@ -30,7 +34,7 @@ var Cons = function(car, cdr) {
 var List = function() {
   var list = [],
       arg = arguments,
-      len = arg.length,
+      len = Length(arg),
       index = -1;
   while (++index < len) {
     list.push(arg[index]);
@@ -71,7 +75,7 @@ var isEq = function(x, y) {
 };
 
 var isPair = function(item) {
-  return _.isArray(item) && isEq(item.length, 2);
+  return _.isArray(item) && isEq(Length(item), 2);
 };
 
 var isNull = function(x) {

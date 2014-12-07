@@ -150,3 +150,107 @@ var procedureBody = function(p) {
 var procedureEnvironment = function(p) {
   return Cadddr(p);
 };
+
+/**
+ * environment
+ */
+var enclosingEnvironment = function(env) {
+  return Cdr(env);
+};
+
+var firstFrame = function(env) {
+  return Cdr(env);
+};
+
+var theEmptyEnvironment = Nil;
+
+var makeFrame = function(variables, values) {
+  return Cons(variables, values);
+};
+
+var frameVariables = function(frame) {
+  return Car(frame);
+};
+
+var frameValues = function(frame) {
+  return Cdr(frame);
+};
+
+var addBindingToFrame = function(variable, value, frame) {
+  setCar(frame, Cons(variable, Car(frame)));
+  setCdr(frame, Cons(value, Cdr(frame)));
+};
+
+var extendEnvironment = function(vars, vals, baseEnv) {
+  if (isEq(Length(vars), Length(vals))) {
+    return Cons(makeFrame(vars, vals), baseEnv);
+  }
+  else {
+    if (Length(vars) < Length(vals)) {
+      throw new Error ('Too many arguments supplied ' +  vars + vals);
+    }
+    else {
+      throw new Error ('Too few arguments supplied ' +  vars + vals);
+    }
+  }
+};
+
+var lookupVariableValue = function(variable, env) {
+  var envLoop = function(env) {
+    var scan = function(vars, vals) {
+      if (isNull(vars)) {
+        return envLoop(enclosingEnvironment(env));
+      }
+      else if (isEq(variable, Car(vars))) {
+        return Car(vals);
+      }
+      else {
+        return Scan(Cdr(vars), Cdr(vals));
+      }
+    };
+    if (isEq(env, theEmptyEnvironment)) {
+      throw new Error('Unbound variable' + variable);
+    }
+    var frame = firstFrame(env);
+    return scan(frameVariables(frame), frameValues(frame));
+  };
+  return envLoop(env);
+};
+
+var setVariableValue = function(variable, value, env) {
+   var envLoop = function(env) {
+    var scan = function(vars, vals) {
+      if (isNull(vars)) {
+        return envLoop(enclosingEnvironment(env));
+      }
+      else if (isEq(variable, Car(vars))) {
+        return setCar(vals, val);
+      }
+      else {
+        return Scan(Cdr(vars), Cdr(vals));
+      }
+    };
+    if (isEq(env, theEmptyEnvironment)) {
+      throw new Error('Unbound variable -- SET!' + variable);
+    }
+    var frame = firstFrame(env);
+    return scan(frameVariables(frame), frameValues(frame));
+   };
+  return envLoop(env);
+};
+
+var defineVariable = function(variable, value, env) {
+  var frame = firstFrame(env);
+  var scan = function(vars, vals) {
+    if (isNull(vars)) {
+      return addBindingToFrame(variable, value, frame);
+    }
+    else if (isEq(variable, Car(vars))) {
+      return setCar(vals, value);
+    }
+    else {
+      return scan(Cdr(vars), Cdr(vals));
+    }
+  };
+  return scan(frameVariables(frame), frameValues(frame));
+};
