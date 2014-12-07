@@ -125,3 +125,28 @@ var evalDefinition = function(exp, env) {
                    env);
   return 'ok';
 };
+
+
+
+/**
+ * evaluator
+ */
+var makeProcedure = function(parameters, body, env) {
+  return List('procedure', parameters, body, env);
+};
+
+var Define = function(isConpoundProcedure, p) {
+  return isTaggedList(p, 'procedure');
+};
+
+var procedureParameters = function(p) {
+  return Cadr(p);
+};
+
+var procedureBody = function(p) {
+  return Caddr(p);
+};
+
+var procedureEnvironment = function(p) {
+  return Cadddr(p);
+};
