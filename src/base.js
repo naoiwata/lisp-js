@@ -42,6 +42,10 @@ var List = function() {
   return list;
 };
 
+var Map = function(list, proc) {
+  return list.map(proc);
+};
+
 var Cadr = function(list) {
   return Car(Cdr(list));
 };
