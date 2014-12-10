@@ -1,6 +1,8 @@
 /* jshint globalstrict:true */
 'use strict';
 
+var base = require('./base');
+
 /**
  * Eval
  * @param {Any} exp
