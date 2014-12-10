@@ -3,6 +3,16 @@
 
 var base = require('./base');
 
+var Nil = base.Nil,
+    Car = base.Car,
+    Cdr = base.Cdr,
+    Cons = base.Cons,
+    List = base.List,
+    Cadr = base.Cadr,
+    Caddr = base.Caddr,
+    Cadddr = base.Cadddr,
+    isTrue = base.isTrue;
+
 /**
  * Eval
  * @param {Any} exp
