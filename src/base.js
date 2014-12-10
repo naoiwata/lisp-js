@@ -1,7 +1,9 @@
+/* jshint globalstrict:true */
+'use strict';
+
 var _ = require('underscore');
 
 module.exports = (function() {
-  'use strict';
 
   /**
    * Lisp built in methods
@@ -19,11 +21,21 @@ module.exports = (function() {
   };
 
   var Car = function(list) {
-    return _.first(list);
+    if (isPair(list)) {
+      return _.first(list);
+    }
+    else {
+      throw new Error('parameter isn\'t list -- CAR ' + list);
+    }
   };
 
   var Cdr = function(list) {
-    return _.rest(list);
+    if (isPair(list)) {
+      return _.rest(list);
+    }
+    else {
+      throw new Error('parameter isn\'t list -- CDR ' + list);
+    }
   };
 
   var Cons = function(car, cdr) {
