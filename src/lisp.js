@@ -1,9 +1,11 @@
 /* jshint globalstrict:true */
 'use strict';
 
-var base = require('./base');
+var base = require('./base'),
+    typeutil = require('./util');
 
 var Nil = base.Nil,
+    Length = base.Length,
     Car = base.Car,
     Cdr = base.Cdr,
     Cons = base.Cons,
@@ -11,7 +13,10 @@ var Nil = base.Nil,
     Cadr = base.Cadr,
     Caddr = base.Caddr,
     Cadddr = base.Cadddr,
-    isTrue = base.isTrue;
+    isEq = base.isEq,
+    isNull = base.isNull,
+    isTrue = base.isTrue,
+    isTaggedList = typeutil.isTaggedList;
 
 /**
  * Eval
