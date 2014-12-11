@@ -40,7 +40,7 @@ module.exports = (function() {
       }
     }
     return arg[len - 1];
-  }
+  };
 
   var Length = function(x) {
     return x.length;
@@ -51,7 +51,7 @@ module.exports = (function() {
   };
 
   var isPair = function(item) {
-    return _.isArray(item) && isEq(Length(item), 2);
+    return And(_.isArray(item), isEq(Length(item), 2));
   };
 
   var isNull = function(x) {
@@ -146,7 +146,7 @@ module.exports = (function() {
   };
 
   var StringToNumber = function(v) {
-    if (_.isString(v) && v !== '' && !_.isNaN(Number(v))) {
+    if (And(_.isString(v), Not(isEq(v, '')), !_.isNaN(Number(v)))) {
       return Number(v);
     }
     else {
@@ -166,6 +166,8 @@ module.exports = (function() {
     True: True,
     False: False,
     Not: Not,
+    And: And,
+    Or: Or,
     Length: Length,
     isEq: isEq,
     isPair: isPair,
