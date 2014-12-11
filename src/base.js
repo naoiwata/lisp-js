@@ -110,6 +110,31 @@ module.exports = (function() {
     return isEq(x, False);
   };
 
+   var NumberToString = function(v) {
+    if (_.isNumber(v)) {
+      return String(v);
+    }
+    else {
+      throw new TypeError(v);
+    }
+  };
+
+  var StringToNumber = function(v) {
+    if (_.isString(v) && v !== '' && !_.isNaN(Number(v))) {
+      return Number(v);
+    }
+    else {
+      return Number(v);
+    }
+  };
+
+  var isTaggedList = function(exp, tag) {
+    if (isPair(exp)) {
+      return isEq(Car(exp), tag);
+    }
+    return False;
+  };
+
   return {
     Nil: Nil,
     True: True,
@@ -133,7 +158,10 @@ module.exports = (function() {
     isNull: isNull,
     isSymbol: isSymbol,
     isTrue: isTrue,
-    isFalse: isFalse
+    isFalse: isFalse,
+    NumberToString: NumberToString,
+    StringToNumber: StringToNumber,
+    isTaggedList: isTaggedList
   };
 
 }());

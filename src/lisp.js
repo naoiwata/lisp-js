@@ -1,8 +1,7 @@
 /* jshint globalstrict:true */
 'use strict';
 
-var base = require('./base'),
-    typeutil = require('./util');
+var base = require('./base');
 
 var Nil = base.Nil,
     Length = base.Length,
@@ -16,7 +15,7 @@ var Nil = base.Nil,
     isEq = base.isEq,
     isNull = base.isNull,
     isTrue = base.isTrue,
-    isTaggedList = typeutil.isTaggedList;
+    isTaggedList = base.isTaggedList;
 
 /**
  * Eval
