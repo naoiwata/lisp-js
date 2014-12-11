@@ -16,8 +16,59 @@ module.exports = (function() {
     return !x;
   };
 
+  var And = function() {
+    var arg = arguments,
+        len = Length(arg),
+        index = -1;
+    while (++index < len) {
+      var val = arg[index];
+      if (isFalse(val)) {
+        return arg[index];
+      }
+    }
+    return arg[len - 1];
+  };
+
+  var Or = function() {
+    var arg = arguments,
+        len = Length(arg),
+        index = -1;
+    while (++index < len) {
+      var val = arg[index];
+      if (isTrue(val)) {
+        return val;
+      }
+    }
+    return arg[len - 1];
+  }
+
   var Length = function(x) {
     return x.length;
+  };
+
+  var isEq = function(x, y) {
+    return x === y;
+  };
+
+  var isPair = function(item) {
+    return _.isArray(item) && isEq(Length(item), 2);
+  };
+
+  var isNull = function(x) {
+    return _.isNull(x);
+  };
+
+  var isSymbol = function(x) {
+    // FIXME
+    return _.isString(x);
+  };
+
+  var isTrue = function(x) {
+    return Not(isEq(x, False));
+  };
+
+  var isFalse = function(x) {
+    return isEq(x, False);
   };
 
   var Car = function(list) {
@@ -85,31 +136,6 @@ module.exports = (function() {
     return Car(Cdr(Cdr(Cdr(list))));
   };
 
-  var isEq = function(x, y) {
-    return x === y;
-  };
-
-  var isPair = function(item) {
-    return _.isArray(item) && isEq(Length(item), 2);
-  };
-
-  var isNull = function(x) {
-    return _.isNull(x);
-  };
-
-  var isSymbol = function(x) {
-    // FIXME
-    return _.isString(x);
-  };
-
-  var isTrue = function(x) {
-    return Not(isEq(x, False));
-  };
-
-  var isFalse = function(x) {
-    return isEq(x, False);
-  };
-
    var NumberToString = function(v) {
     if (_.isNumber(v)) {
       return String(v);
@@ -141,6 +167,12 @@ module.exports = (function() {
     False: False,
     Not: Not,
     Length: Length,
+    isEq: isEq,
+    isPair: isPair,
+    isNull: isNull,
+    isSymbol: isSymbol,
+    isTrue: isTrue,
+    isFalse: isFalse,
     Car: Car,
     Cdr: Cdr,
     Cons: Cons,
@@ -153,12 +185,6 @@ module.exports = (function() {
     Caddr: Caddr,
     Cdddr: Cdddr,
     Cadddr: Cadddr,
-    isEq: isEq,
-    isPair: isPair,
-    isNull: isNull,
-    isSymbol: isSymbol,
-    isTrue: isTrue,
-    isFalse: isFalse,
     NumberToString: NumberToString,
     StringToNumber: StringToNumber,
     isTaggedList: isTaggedList
