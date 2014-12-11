@@ -240,7 +240,7 @@ var setVariableValue = function(variable, value, env) {
         return envLoop(enclosingEnvironment(env));
       }
       else if (isEq(variable, Car(vars))) {
-        return setCar(vals, val);
+        return setCar(vals, value);
       }
       else {
         return Scan(Cdr(vars), Cdr(vals));
