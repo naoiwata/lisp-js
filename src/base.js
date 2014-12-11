@@ -146,7 +146,7 @@ module.exports = (function() {
   };
 
   var StringToNumber = function(v) {
-    if (And(_.isString(v), Not(isEq(v, '')), !_.isNaN(Number(v)))) {
+    if (And(_.isString(v), Not(isEq(v, '')), Not(_.isNaN(Number(v))))) {
       return Number(v);
     }
     else {
