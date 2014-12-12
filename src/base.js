@@ -1,9 +1,7 @@
-/* jshint globalstrict:true */
-'use strict';
-
-var _ = require('underscore');
-
 module.exports = (function() {
+  'use strict';
+
+  var _ = require('underscore');
 
   /**
    * Lisp built in methods
