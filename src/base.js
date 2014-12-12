@@ -57,8 +57,7 @@ module.exports = (function() {
   };
 
   var isSymbol = function(x) {
-    // FIXME
-    return _.isString(x);
+    return Not(_.isUndefined(x));
   };
 
   var isTrue = function(x) {
