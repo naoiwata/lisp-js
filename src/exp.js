@@ -1,14 +1,36 @@
 /* jshint globalstrict:true */
 'use strict';
 
-var _ = require('underscore');
+var _ = require('underscore'),
+    base = require('./base');
+
+var True = True,
+    False = False,
+    Not = Not,
+    Or = base.Or,
+    Car = base.Car,
+    Cdr = base.Cdr,
+    Cons = base.Cons,
+    List = base.List,
+    Cadr = base.Cadr,
+    Cddr = base.Cddr,
+    Caadr = base.Caadr,
+    Cdadr = base.Cdadr,
+    Caddr = base.Caddr,
+    Cdddr = base.Cdddr,
+    Cadddr = base.Cadddr,
+    isEq = base.isEq,
+    isPair = base.isPair,
+    isNull = base.isNull,
+    isSymbol = base.isSymbol,
+    isTaggedList = base.isTaggedList;
 
 
 /**
  * Expressions
  */
 var selfEvaluating = function(exp) {
-  if (_.isString(exp) || _.isNumber(exp)) {
+  if (Or(_.isString(exp), _.isNumber(exp))) {
     return True;
   }
   else {
@@ -18,7 +40,7 @@ var selfEvaluating = function(exp) {
 
 var isVariable = function(exp) {
   // FIXME:
-  return !_.isUndefined(exp);
+  return Not(_.isUndefined(exp));
 };
 
 var isQuoted = function(exp) {
