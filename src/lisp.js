@@ -5,9 +5,9 @@ var base = require('./base');
 
 var Nil = base.Nil,
     Length = base.Length,
+    Cons = base.Cons,
     Car = base.Car,
     Cdr = base.Cdr,
-    Cons = base.Cons,
     List = base.List,
     Cadr = base.Cadr,
     Caddr = base.Caddr,
