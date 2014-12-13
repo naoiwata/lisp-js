@@ -68,27 +68,18 @@ module.exports = (function() {
     return isEq(x, False);
   };
 
-  var Car = function(list) {
-    if (isPair(list)) {
-      return _.first(list);
-    }
-    else {
-      throw new Error('parameter isn\'t list -- CAR ' + list);
-    }
+  var Cons = function(x, y) {
+    var dispatch = function(m) {
+      if (isEq(m, 0)) { return x; }
+      else if (isEq(m, 1)) { return y; }
+      else { throw new Error('Argument not 0 or 1 -- CONS' + m); }
+    };
+    return dispatch;
   };
 
-  var Cdr = function(list) {
-    if (isPair(list)) {
-      return _.rest(list);
-    }
-    else {
-      throw new Error('parameter isn\'t list -- CDR ' + list);
-    }
-  };
+  var Car = function(z) { return z(0); };
 
-  var Cons = function(car, cdr) {
-    return [car, cdr];
-  };
+  var Cdr = function(z) { return z(1); };
 
   var List = function() {
     var listIter = function(items) {
@@ -96,13 +87,22 @@ module.exports = (function() {
         return args;
       }
       else {
-        return Cons(_.first(items),
-                    ListIter(_.rest(items)));
+        return Cons(Car(items),
+                    listIter(Cdr(items)));
       }
     };
     var args = Array.prototype.slice.call(arguments);
-    arg.push(Nil);
+    args.push(Nil);
     return listIter(args);
+  };
+
+  var ListRef = function(items, n) {
+    if (isEq(n, 0)) {
+      return Car(items);
+    }
+    else {
+      return ListRef(Cdr(items), n - 1);
+    }
   };
 
   var Map = function(list, proc) {
