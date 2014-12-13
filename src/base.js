@@ -91,14 +91,18 @@ module.exports = (function() {
   };
 
   var List = function() {
-    var list = [],
-        arg = arguments,
-        len = Length(arg),
-        index = -1;
-    while (++index < len) {
-      list.push(arg[index]);
-    }
-    return list;
+    var listIter = function(items) {
+      if (isNull(_.first(items))) {
+        return args;
+      }
+      else {
+        return Cons(_.first(items),
+                    ListIter(_.rest(items)));
+      }
+    };
+    var args = Array.prototype.slice.call(arguments);
+    arg.push(Nil);
+    return listIter(args);
   };
 
   var Map = function(list, proc) {
