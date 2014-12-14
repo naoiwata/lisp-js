@@ -80,11 +80,11 @@ module.exports = (function() {
   var List = function() {
     var listIter = function(items) {
       if (isNull(_.first(items))) {
-        return args;
+        return Nil;
       }
       else {
-        return Cons(Car(items),
-                    listIter(Cdr(items)));
+        return Cons(_.first(items),
+                    listIter(_.rest(items)));
       }
     };
     var args = Array.prototype.slice.call(arguments);
