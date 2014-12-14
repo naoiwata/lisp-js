@@ -40,10 +40,6 @@ module.exports = (function() {
     return arg[len - 1];
   };
 
-  var Length = function(x) {
-    return x.length;
-  };
-
   var isEq = function(x, y) {
     return x === y;
   };
@@ -94,6 +90,15 @@ module.exports = (function() {
     var args = Array.prototype.slice.call(arguments);
     args.push(Nil);
     return listIter(args);
+  };
+
+  var Length = function(items) {
+    if (isNull(items)) {
+      return 0;
+    }
+    else {
+      return Length(Cdr(items)) + 1;
+    }
   };
 
   var ListRef = function(items, n) {
