@@ -2,5 +2,5 @@
 /*global it, describe, expect */
 
 describe('base', function() {
-  // TODO: 
+  var base = require('base');
 });

@@ -11,6 +11,12 @@
   },
   "author": "naoiwata",
   "license": "MIT",
+  "browserify": {
+    "paths": [
+      "./src"
+    ],
+    "debug": false
+  },
   "devDependencies": {
     "underscore": "^1.7.0",
     "jshint": "^2.5.10",
@@ -21,6 +27,8 @@
     "mocha": "^2.0.1",
     "sinon": "^1.12.2",
     "karma-phantomjs-launcher": "^0.1.4",
-    "karma": "^0.12.28"
+    "karma": "^0.12.28",
+    "browserify": "^7.0.2",
+    "karma-browserify": "^1.0.1"
   }
 }

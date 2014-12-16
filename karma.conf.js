@@ -2,6 +2,7 @@
 // Generated on Tue Dec 16 2014 21:17:23 GMT+0900 (JST)
 
 module.exports = function(config) {
+  var packageJson = require('./package.json');
 
   config.set({
 
@@ -11,7 +12,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'sinon', 'chai'],
+    frameworks: ['mocha', 'browserify', 'sinon', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -28,6 +29,14 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/*-Spec.js': ['browserify']
+    },
+
+    browserify: {
+      watch: true,
+      debug: packageJson.browserify.debug,
+      paths: packageJson.browserify.paths
+      // noParse: ["jquery"]
     },
 
     // test results reporter to use
