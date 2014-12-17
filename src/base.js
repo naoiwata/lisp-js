@@ -16,7 +16,7 @@ module.exports = (function() {
 
   var And = function() {
     var arg = arguments,
-        len = Length(arg),
+        len = arg.length,
         index = -1;
     while (++index < len) {
       var val = arg[index];
@@ -29,7 +29,7 @@ module.exports = (function() {
 
   var Or = function() {
     var arg = arguments,
-        len = Length(arg),
+        len = arg.length,
         index = -1;
     while (++index < len) {
       var val = arg[index];
