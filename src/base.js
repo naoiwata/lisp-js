@@ -44,6 +44,10 @@ module.exports = (function() {
     return x === y;
   };
 
+  var isEqual = function(x, y) {
+    return _.isEqual(x, y);
+  };
+
   var isPair = function(item) {
     return And(_.isArray(item), isEq(Length(item), 2));
   };
@@ -176,6 +180,7 @@ module.exports = (function() {
     Or: Or,
     Length: Length,
     isEq: isEq,
+    isEqual: isEqual,
     isPair: isPair,
     isNull: isNull,
     isSymbol: isSymbol,

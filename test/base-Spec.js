@@ -69,4 +69,70 @@ describe('base', function() {
       expect(base.Or(False, False, False)).to.be.false;
     });
   });
+
+  describe('isEq', function() {
+    it('isEq(<Number>, <Number>) return true', function() {
+      expect(base.isEq(100, 100)).to.be.true;
+    });
+
+    it('isEq(<Number>, <Not Number>) return false', function() {
+      expect(base.isEq(100, '100')).to.be.false;
+    });
+
+    it('isEq(<String>, <String>) return true', function() {
+      expect(base.isEq('hoge', 'hoge')).to.be.true;
+    });
+
+    it('isEq(<Function>, <Function>) return true', function() {
+      var func = function() {};
+      expect(base.isEq(func, func)).to.be.true;
+    });
+
+    it('isEq(<Function1>, <Function2>) return false', function() {
+      expect(base.isEq(function() {}, function() {})).to.be.false;
+    });
+
+    it('isEq(<Object>, <Object>) return true', function() {
+      var obj = {};
+      expect(base.isEq(obj, obj)).to.be.true;
+    });
+
+    it('isEq(<Object1>, <Object2>) return false', function() {
+      var obj = {};
+      expect(base.isEq({}, {})).to.be.false;
+    });
+  });
+
+  describe('isEqual', function() {
+    it('isEqual(<Number>, <Number>) return true', function() {
+      expect(base.isEqual(100, 100)).to.be.true;
+    });
+
+    it('isEqual(<Number>, <Not Number>) return false', function() {
+      expect(base.isEqual(100, '100')).to.be.false;
+    });
+
+    it('isEqual(<String>, <String>) return true', function() {
+      expect(base.isEqual('hoge', 'hoge')).to.be.true;
+    });
+
+    it('isEqual(<Function>, <Function>) return true', function() {
+      var func = function() {};
+      expect(base.isEqual(func, func)).to.be.true;
+    });
+
+    it('isEqual(<Function1>, <Function2>) return false', function() {
+      expect(base.isEqual(function() {}, function() {})).to.be.false;
+    });
+
+    it('isEqual(<Object>, <Object>) return true', function() {
+      var obj = {};
+      expect(base.isEqual(obj, obj)).to.be.true;
+    });
+
+    it('isEqual(<Object1>, <Object2>) return true', function() {
+      var obj = {};
+      expect(base.isEqual({}, {})).to.be.true;
+    });;
+  });
 });
