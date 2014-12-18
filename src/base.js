@@ -48,8 +48,15 @@ module.exports = (function() {
     return _.isEqual(x, y);
   };
 
-  var isPair = function(item) {
-    return And(_.isArray(item), isEq(Length(item), 2));
+  var isPair = function(obj) {
+    var car, cdr;
+    try {
+      car = Car(obj);
+      cdr = Cdr(obj);
+    } catch(e) {
+      return False;
+    }
+    return True;
   };
 
   var isNull = function(x) {

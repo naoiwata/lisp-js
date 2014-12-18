@@ -139,4 +139,27 @@ describe('base', function() {
       expect( isEqual({}, {})).to.be.true;
     });;
   });
+
+  describe('isPair', function() {
+    var isPair = base.isPair;
+    it('isPair(<List>) return true', function() {
+      var list = base.Cons(1, 2);
+      expect(isPair(list)).to.be.true;
+    });
+
+    it('isPair(<List>) return true', function() {
+      var Cons = base.Cons,
+          list = Cons(Cons(1, 2), Cons(3, 4));
+      expect(isPair(list)).to.be.true;
+    });
+
+    it('isPair(<List>) return true', function() {
+      var list = base.Cons(1, 2);
+      expect(isPair(list)).to.be.true;
+    });
+
+    it('isPair(<Nil>) return false', function() {
+      expect(isPair(base.Nil)).to.be.false;
+    });
+  });
 });
