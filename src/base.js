@@ -64,6 +64,7 @@ module.exports = (function() {
   };
 
   var isSymbol = function(x) {
+    // FIXME:
     return Not(_.isUndefined(x));
   };
 

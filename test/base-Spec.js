@@ -162,4 +162,30 @@ describe('base', function() {
       expect(isPair(base.Nil)).to.be.false;
     });
   });
+
+  describe('isNull', function() {
+    it('isNull(<Nil>) return true', function() {
+      expect(base.isNull(base.Nil)).to.be.true;
+    });
+
+    it('isNull(<List>) return false', function() {
+      expect(base.isNull(base.Cons('hoge', 'fuga'))).to.be.false;
+    });
+  });
+
+  describe('isSymbol', function() {
+    it('isSymbol(<Symbol>) return true', function() {
+      var bar = 100;
+      expect(base.isSymbol(bar)).to.be.true;
+    });
+
+    it('isSymbol(<Nil>) return false', function() {
+      expect(base.isSymbol(base.Nil)).to.be.false;
+    });
+
+    it('isSymbol(<List>) return false', function() {
+      var foo;
+      expect(base.isSymbol(foo)).to.be.false;
+    });
+  });
 });
