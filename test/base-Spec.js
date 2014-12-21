@@ -173,19 +173,51 @@ describe('base', function() {
     });
   });
 
-  describe('isSymbol', function() {
-    it('isSymbol(<Symbol>) return true', function() {
-      var bar = 100;
-      expect(base.isSymbol(bar)).to.be.true;
+  describe.skip('isSymbol', function() {
+    // TODO
+  });
+
+  describe('isTrue', function() {
+    it('isTrue(true) return true', function() {
+      expect(base.isTrue(true)).to.be.true;
     });
 
-    it('isSymbol(<Nil>) return false', function() {
-      expect(base.isSymbol(base.Nil)).to.be.false;
+    it('isTrue(false) return false', function() {
+      expect(base.isTrue(false)).to.be.false;
     });
 
-    it('isSymbol(<List>) return false', function() {
-      var foo;
-      expect(base.isSymbol(foo)).to.be.false;
+    it('isTrue(100) return true', function() {
+      expect(base.isTrue(100)).to.be.true;
+    });
+
+    it('isTrue(Nil) return true', function() {
+      expect(base.isTrue(base.Nil)).to.be.true;
+    });
+
+    it('isTrue("String") return true', function() {
+      expect(base.isTrue('string')).to.be.true;
+    });
+  });
+
+  describe('isFalse', function() {
+    it('isFalse(true) return false', function() {
+      expect(base.isFalse(true)).to.be.false;
+    });
+
+    it('isFalse(false) return true', function() {
+      expect(base.isFalse(false)).to.be.true;
+    });
+
+    it('isFalse(100) return false', function() {
+      expect(base.isFalse(100)).to.be.false;
+    });
+
+    it('isFalse(Nil) return false', function() {
+      expect(base.isFalse(base.Nil)).to.be.false;
+    });
+
+    it('isFalse("String") return false', function() {
+      expect(base.isFalse('string')).to.be.false;
     });
   });
 });
