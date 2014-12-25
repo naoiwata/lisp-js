@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "./node_modules/.bin/jshint src && ./node_modules/.bin/jshint test && karma start --single-run"
+    "test": "./node_modules/.bin/jshint src && ./node_modules/.bin/jshint test && ./node_modules/.bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "underscore": "^1.7.0",
-    "jshint": "^2.5.10",
+    "jshint": "^2.5.11",
     "karma-sinon": "^1.0.4",
     "karma-mocha": "^0.1.10",
     "karma-chai": "^0.1.0",
@@ -29,6 +29,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma": "^0.12.28",
     "browserify": "^7.0.2",
-    "karma-browserify": "^1.0.1"
+    "karma-browserify": "^1.0.1",
+    "karma-cli": "0.0.4"
   }
 }

@@ -65,7 +65,7 @@ module.exports = (function() {
 
   var isSymbol = function(x) {
     // FIXME:
-    return Not(_.isUndefined(x));
+    return x instanceof Symbol;
   };
 
   var isTrue = function(x) {
@@ -179,6 +179,21 @@ module.exports = (function() {
     return False;
   };
 
+  /**
+   * symbol
+   */
+  var Symbol = function(str) {
+    this.str = str;
+  };
+
+  Symbol.prototype.toString = function() {
+    return this.str;
+  };
+
+  var symbol = function(str) {
+    return new Symbol(str);
+  };
+
   return {
     Nil: Nil,
     True: True,
@@ -208,7 +223,8 @@ module.exports = (function() {
     Cadddr: Cadddr,
     NumberToString: NumberToString,
     StringToNumber: StringToNumber,
-    isTaggedList: isTaggedList
+    isTaggedList: isTaggedList,
+    symbol: symbol
   };
 
 }());

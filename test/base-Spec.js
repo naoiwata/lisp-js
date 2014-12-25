@@ -174,7 +174,15 @@ describe('base', function() {
   });
 
   describe.skip('isSymbol', function() {
-    // TODO
+    it('isSymbol(<Symbol>) return true', function() {
+      var hoge = base.symbol('hoge');
+      expect(isSymbol(hoge)).to.be.true;
+    });
+
+    it('isSymbol(<String>) return false', function() {
+      var hoge = 'hoge';
+      expect(isSymbol(hoge)).to.be.false;
+    });
   });
 
   describe('isTrue', function() {
